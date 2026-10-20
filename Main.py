@@ -1,1 +1,1 @@
-print("tout le monde aime les chairlifts")
+print("tout le monde aime les chairlift")
