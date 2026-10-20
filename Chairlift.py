@@ -8,44 +8,44 @@ class Chairlift:
         self.__tempsDebarquement = 0
 
 
-    def setVitesse(vitesse):
+    def setVitesse(self, vitesse):
         if vitesse >= 0:
-            __vitesse = vitesse
+            self.__vitesse = vitesse
             return True
         else:
             return False
 
-    def setNombreDeChaise(nombreDeChaise):
+    def setNombreDeChaise(self,nombreDeChaise):
         if nombreDeChaise >= 0:
-            __nombreDeChaise = nombreDeChaise
+            self.__nombreDeChaise = nombreDeChaise
             return True
         else:
             return False
 
-    def setLongeurDuTrajet(longeurDuTrajet):
+    def setLongeurDuTrajet(self,longeurDuTrajet):
         if longeurDuTrajet > 0:
-            __longeurDuTrajet = longeurDuTrajet
+            self.__longeurDuTrajet = longeurDuTrajet
             return True
         else:
             return False
 
-    def setTempsEmbarquement(tempsEmbarquement):
+    def setTempsEmbarquement(self, tempsEmbarquement):
         if tempsEmbarquement >= 0:
-            __tempsEmbarquement = tempsEmbarquement
+            self.__tempsEmbarquement = tempsEmbarquement
             return True
         else:
             return False
 
-    def setTempsDebarquement(tempsDebarquement):
+    def setTempsDebarquement(self,tempsDebarquement):
         if tempsDebarquement >= 0:
-            __tempsDebarquement = tempsDebarquement
+            self.__tempsDebarquement = tempsDebarquement
             return True
         else:
             return False
 
-    def setNombreDePersonnesParChaise(nombreDePersonnesParChaise):
+    def setNombreDePersonnesParChaise(self, nombreDePersonnesParChaise):
         if nombreDePersonnesParChaise >= 0:
-            __nombreDePersonnesParChaise = nombreDePersonnesParChaise
+            self.__nombreDePersonnesParChaise = nombreDePersonnesParChaise
             return True
         else:
             return False
@@ -64,8 +64,36 @@ class Chairlift:
         tempsDeCycle = 2*tempsTrajet + self.__tempsEmbarquement + self.__tempsDebarquement
         return tempsDeCycle
 
-    
+    def test(self):
+        print("input vitesse: ")
+        vitesse = float(input())
+        self.setVitesse(vitesse)
+
+        print("input nombre de chaises: ")
+        nombreDeChaise = int(input())
+        self.setNombreDeChaise(nombreDeChaise)
+
+        print("input longueur du trajet: ")
+        longeurDuTrajet = float(input())
+        self.setLongeurDuTrajet(longeurDuTrajet)
+
+        print("input temps d'embarquement: ")
+        tempsEmbarquement = float(input())
+        self.setTempsEmbarquement(tempsEmbarquement)
+
+        print("input temps de débarquement: ")
+        tempsDebarquement = float(input())
+        self.setTempsDebarquement(tempsDebarquement)
+
+        print("input nombre de personnes par chaise: ")
+        nombreDePersonnesParChaise = int(input())
+        self.setNombreDePersonnesParChaise(nombreDePersonnesParChaise)
+
+        print(self)
+
 
     def __str__(self):
-        return f"Vitesse: {self.__vitesse}, Nombre de chaises: {self.__nombreDeChaise}, Longueur du trajet: {self.__longeurDuTrajet}, Temps d'embarquement: {self.__tempsEmbarquement}, Temps de débarquement: {self.__tempsDebarquement}"
+        return f"Vitesse: {self.__vitesse}, Nombre de chaises: {self.__nombreDeChaise}, Longueur du trajet: {self.__longeurDuTrajet}, Temps d'embarquement: {self.__tempsEmbarquement}, Temps de débarquement: {self.__tempsDebarquement}, Nombre de personnes par chaise: {self.__nombreDePersonnesParChaise}, Temps de trajet: {self.calculerTempsTrajet()}, Temps de monter: {self.calculerTempsDeMonter()}, Temps de cycle: {self.calculerTempsDeCycle()}"
 
+mon_chairlift = Chairlift()
+mon_chairlift.test()
