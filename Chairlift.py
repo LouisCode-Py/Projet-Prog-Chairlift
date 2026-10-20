@@ -41,3 +41,9 @@ class Chairlift:
             return True
         else:
             return False
+
+    def __str__(self):
+        return f"Vitesse: {self.__vitesse}, Nombre de chaises: {self.__nombreDeChaise}, Longueur du trajet: {self.__longeurDuTrajet}, Temps d'embarquement: {self.__tempsEmbarquement}, Temps de débarquement: {self.__tempsDebarquement}"
+
+mon_chairlift = Chairlift()
+print(mon_chairlift)
