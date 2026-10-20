@@ -1,2 +1,5 @@
 print("tout le monde aime les chairlifts")
-print("jean marc")
+
+if __name__ == "__main__" :
+    print("ok")
+
