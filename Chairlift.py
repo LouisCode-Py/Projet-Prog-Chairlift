@@ -76,7 +76,30 @@ class Chairlift:
     def calculerNombreDePersonnesParHeure(self):
         tempsDeCycle = self.calculerTempsDeCycle()
         nombreDePersonnesParHeure = (3600 / tempsDeCycle) * self.__nombreDeChaise * self.__nombreDePersonnesParChaise
-        return nombreDePersonnesParHeure
+        return int(nombreDePersonnesParHeure)
+    
+    def calculerNombreDePersonnesParametreManquant(self, valeurParametre):
+        if self.__parametreObserver == "vitesse":
+            return (3600 * (2*(self.__longeurDuTrajet/valeurParametre) + self.__tempsEmbarquement + self.__tempsDebarquement))  * self.__nombreDeChaise * self.__nombreDePersonnesParChaise
+        
+        if self.__parametreObserver == "nombreDeChaise":
+            return (3600 / (2*(self.__longeurDuTrajet/self.__vitesse) + self.__tempsEmbarquement + self.__tempsDebarquement)) * valeurParametre * self.__nombreDePersonnesParChaise
+        
+        if self.__parametreObserver == "longeurDuTrajet":
+            return (3600 / (2*(valeurParametre/self.__vitesse) + self.__tempsEmbarquement + self.__tempsDebarquement)) * self.__nombreDeChaise * self.__nombreDePersonnesParChaise
+        
+        if self.__parametreObserver == "tempsEmbarquement":
+            return (3600 / (2*(self.__longeurDuTrajet/self.__vitesse) + valeurParametre + self.__tempsDebarquement)) * self.__nombreDeChaise * self.__nombreDePersonnesParChaise
+        
+        if self.__parametreObserver == "tempsDebarquement":
+            return (3600 / (2*(self.__longeurDuTrajet/self.__vitesse) + self.__tempsEmbarquement + valeurParametre)) * self.__nombreDeChaise * self.__nombreDePersonnesParChaise
+        
+        if self.__parametreObserver == "nombreDePersonnesParChaise":
+            return (3600 / (2*(self.__longeurDuTrajet/self.__vitesse) + self.__tempsEmbarquement + self.__tempsDebarquement)) * self.__nombreDeChaise * valeurParametre
+        else:
+            return 0
+
+
 
     def test(self):
         print("input vitesse: ")
@@ -110,5 +133,5 @@ class Chairlift:
     def __str__(self):
         return f"Vitesse: {self.__vitesse}, Nombre de chaises: {self.__nombreDeChaise}, Longueur du trajet: {self.__longeurDuTrajet}, Temps d'embarquement: {self.__tempsEmbarquement}, Temps de débarquement: {self.__tempsDebarquement}, Nombre de personnes par chaise: {self.__nombreDePersonnesParChaise}, Temps de trajet: {self.calculerTempsTrajet()}, Temps de monter: {self.calculerTempsDeMonter()}, Temps de cycle: {self.calculerTempsDeCycle()}"
 
-#mon_chairlift = Chairlift()
-#mon_chairlift.test()
+mon_chairlift = Chairlift()
+mon_chairlift.test()
