@@ -1,1 +1,0 @@
-print("tout le monde aime les chairlift")
