@@ -7,6 +7,8 @@ class Chairlift:
         self.__tempsEmbarquement = 0
         self.__tempsDebarquement = 0
 
+        self.__parametreObserver = "none"
+
 
     def setVitesse(self, vitesse):
         if vitesse >= 0:
@@ -49,6 +51,13 @@ class Chairlift:
             return True
         else:
             return False
+        
+    def setParametreObserver(self, parametreObserver):
+        if parametreObserver in ["vitesse", "nombreDeChaise", "longeurDuTrajet", "tempsEmbarquement", "tempsDebarquement", "nombreDePersonnesParChaise", "none"]:
+            self.__parametreObserver = parametreObserver
+            return True
+        else:
+            return False
 
     def calculerTempsTrajet(self):
         tempsTrajet = self.__longeurDuTrajet / self.__vitesse
@@ -63,6 +72,11 @@ class Chairlift:
         tempsTrajet = self.calculerTempsTrajet()
         tempsDeCycle = 2*tempsTrajet + self.__tempsEmbarquement + self.__tempsDebarquement
         return tempsDeCycle
+
+    def calculerNombreDePersonnesParHeure(self):
+        tempsDeCycle = self.calculerTempsDeCycle()
+        nombreDePersonnesParHeure = (3600 / tempsDeCycle) * self.__nombreDeChaise * self.__nombreDePersonnesParChaise
+        return nombreDePersonnesParHeure
 
     def test(self):
         print("input vitesse: ")
@@ -90,6 +104,7 @@ class Chairlift:
         self.setNombreDePersonnesParChaise(nombreDePersonnesParChaise)
 
         print(self)
+        print(f"Nombre de personnes par heure: {self.calculerNombreDePersonnesParHeure()}")
 
 
     def __str__(self):
