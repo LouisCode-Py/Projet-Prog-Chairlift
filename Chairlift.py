@@ -1,3 +1,5 @@
+import numpy as np
+
 class Chairlift:
     def __init__(self):
         self.__vitesse = 0
@@ -99,6 +101,14 @@ class Chairlift:
         else:
             return 0
 
+    def getGraphData(self, resolution, min, max):
+        x = np.linspace(min, max, num=resolution)
+        data = np.array([],[])
+        #for i in range(resolution):
+            #data[i][0] = x[i]
+            #data[i][1] = self.calculerNombreDePersonnesParametreManquant(x[i])
+        #print(data)
+
 
 
     def test(self):
@@ -135,3 +145,4 @@ class Chairlift:
 
 mon_chairlift = Chairlift()
 mon_chairlift.test()
+#mon_chairlift.getGraphData(11,0,10)
