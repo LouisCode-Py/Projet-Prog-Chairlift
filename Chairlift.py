@@ -113,11 +113,14 @@ class Chairlift:
     
         return np.column_stack((x, y))
 
-    def importFromCSV():
+    def getParametreObserver(self):
+        return self.__parametreObserver
+    
+    def importFromCSV(self):
         print("ouf")
 
 
-    def exportToCSV():
+    def exportToCSV(self):
         print("fuck")
 
 
