@@ -85,7 +85,6 @@ class Chairlift:
             if self.__parametreObserver == "vitesse":
                 return int((3600 / (2*(self.__longeurDuTrajet/valeurParametre) + self.__tempsEmbarquement + self.__tempsDebarquement)) * self.__nombreDeChaise * self.__nombreDePersonnesParChaise)
             
-            
             elif self.__parametreObserver == "nombreDeChaise":
                 return int((3600 / (2*(self.__longeurDuTrajet/self.__vitesse) + self.__tempsEmbarquement + self.__tempsDebarquement)) * valeurParametre * self.__nombreDePersonnesParChaise)
             
@@ -113,6 +112,13 @@ class Chairlift:
         ])
     
         return np.column_stack((x, y))
+
+    def importFromCSV():
+        print("ouf")
+
+
+    def exportToCSV():
+        print("fuck")
 
 
 
