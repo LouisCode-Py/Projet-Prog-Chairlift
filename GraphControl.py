@@ -25,12 +25,19 @@ class GraphControl(tk.Frame):
         self.canvas.get_tk_widget().pack(fill="both", expand=True)
 
 
-    def mise_a_jour_image(self, titre,titrey,titrex):
+    def mise_a_jour_image(self, titre,titrey="Personnes par heure"):
         ## DOIT PRENDRE EN PARAMETRE TITRE?
         ## DOIT PRENDRE EN PARAMETRE FONCTION QUI VERIFIER SI DONNÉES ONT CHARGER CORRECTEMENT
         
         donnee = self.modele.getGraphData(11,0,10)
-        print(donnee)
+
+        ##Creation dictionnaire des noms d'axe des x possible et accesseur de parametre ajouter
+        parametre_obs = self.modele.getParametreObserver()
+        dic ={"vitesse":["Vitesse"], "nombreDeChaise":["Nombre de chaise"], "longeurDuTrajet":["Longeur du trajet"],
+                  "tempsEmbarquement":["Temps embarquement"], "tempsDebarquement":["Temps debarquement"], "nombreDePersonnesParChaise":["Personnes par chaise"], "none":["Vide"]}
+
+        ## Pour trouver le titre de l'axe des x
+        titrex = dic[parametre_obs][0]
 
         self.axis.clear()
         self.axis.set(title= titre,
@@ -57,5 +64,5 @@ mon_Chairlift.setParametreObserver("vitesse")
 g = GraphControl(root, modele=mon_Chairlift)
 
 g.pack(fill="both", expand=True)
-g.mise_a_jour_image("Test","P/h","Temps")
+g.mise_a_jour_image("Test","Temps")
 root.mainloop()
