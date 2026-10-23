@@ -25,45 +25,37 @@ class GraphControl(tk.Frame):
         self.canvas.get_tk_widget().pack(fill="both", expand=True)
 
 
-    def mise_a_jour_image(self, titre, donneesChargees,
-                           col_x, col_y="P/h", ##CHANGER NOM DE COLX ET COLY, ainsi que les legendes
-                           label_x="", label_y="Nombre de personne par heure"):
+    def mise_a_jour_image(self, titre,titrey,titrex):
         ## DOIT PRENDRE EN PARAMETRE TITRE?
         ## DOIT PRENDRE EN PARAMETRE FONCTION QUI VERIFIER SI DONNÉES ONT CHARGER CORRECTEMENT
-        x,y = self.modele.getGraphData(self,20,0,12)
+        
+        donnee = self.modele.getGraphData(11,0,10)
+        print(donnee)
+
         self.axis.clear()
-
-        #TODO Bloc de if pour trouver le titre de l'axe des x
-
-
-
-        #TODO CHANGER TITRE AXES
         self.axis.set(title= titre,
-                      xlabel="", ylabel="")
-        if donneesChargees.empty or donneesChargees is None:
+                xlabel=titrex, ylabel=titrey)
+
+        if donnee is None or donnee.size == 0:
             self.axis.text(0.5,0.5,"Aucune données", transform=self.axis.transAxes,
-                           ha="center", va="center")
-        elif col_x not in donneesChargees or col_y not in donneesChargees:
-            #TODO Trouver nom de colonnes
-            self.axis.text(0.5,0.5,"Colonnes manquantes", transform=self.axis.transAxes,
-                            ha="center", va="center")
-            
+                ha="center", va="center")
         else:
-            self.axis.plot(donneesChargees[col_x], donneesChargees[col_y], label=titre)
+            x,y = donnee.T
+            self.axis.plot(x, y, label=titre)
             self.axis.legend()
-    
+
         self.axis.grid(alpha=0.3)
         self.canvas.draw_idle()
 
 import pandas as pd
 
-class FakeModele:
-    def getGraphData(self, resolution, x_min, x_max):
-        import numpy as np
-        x = np.linspace(x_min, x_max, resolution)
-        return x, x**2
 root = tk.Tk()
-g = GraphControl(root, modele=Chairlift())
+mon_Chairlift = Chairlift()
+mon_Chairlift.test()
+mon_Chairlift.setParametreObserver("vitesse")
+
+g = GraphControl(root, modele=mon_Chairlift)
 
 g.pack(fill="both", expand=True)
+g.mise_a_jour_image("Test","P/h","Temps")
 root.mainloop()
