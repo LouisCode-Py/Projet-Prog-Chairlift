@@ -2,6 +2,7 @@
 from matplotlib.figure import Figure
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 import tkinter as tk
+from Chairlift import Chairlift
 #TODO COMMENTER AVANT D'ENVOYER
 
 ## commencer par prendre donnees ncecessaire a la creation du graphique dans __init__
@@ -29,6 +30,7 @@ class GraphControl(tk.Frame):
                            label_x="", label_y="Nombre de personne par heure"):
         ## DOIT PRENDRE EN PARAMETRE TITRE?
         ## DOIT PRENDRE EN PARAMETRE FONCTION QUI VERIFIER SI DONNÉES ONT CHARGER CORRECTEMENT
+        x,y = self.modele.getGraphData(self,20,0,12)
         self.axis.clear()
 
         #TODO Bloc de if pour trouver le titre de l'axe des x
@@ -54,8 +56,14 @@ class GraphControl(tk.Frame):
         self.canvas.draw_idle()
 
 import pandas as pd
+
+class FakeModele:
+    def getGraphData(self, resolution, x_min, x_max):
+        import numpy as np
+        x = np.linspace(x_min, x_max, resolution)
+        return x, x**2
 root = tk.Tk()
-g = GraphControl(root, modele=None)
+g = GraphControl(root, modele=Chairlift())
+
 g.pack(fill="both", expand=True)
-g.mise_a_jour_image("Test", pd.DataFrame({"t": [0, 1, 2, 3], "P/h": [0, 2, 1, 4]}),"t")
 root.mainloop()
