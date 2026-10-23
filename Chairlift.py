@@ -81,33 +81,47 @@ class Chairlift:
         return int(nombreDePersonnesParHeure)
     
     def calculerNombreDePersonnesParametreManquant(self, valeurParametre):
-        if self.__parametreObserver == "vitesse":
-            return (3600 * (2*(self.__longeurDuTrajet/valeurParametre) + self.__tempsEmbarquement + self.__tempsDebarquement))  * self.__nombreDeChaise * self.__nombreDePersonnesParChaise
-        
-        if self.__parametreObserver == "nombreDeChaise":
-            return (3600 / (2*(self.__longeurDuTrajet/self.__vitesse) + self.__tempsEmbarquement + self.__tempsDebarquement)) * valeurParametre * self.__nombreDePersonnesParChaise
-        
-        if self.__parametreObserver == "longeurDuTrajet":
-            return (3600 / (2*(valeurParametre/self.__vitesse) + self.__tempsEmbarquement + self.__tempsDebarquement)) * self.__nombreDeChaise * self.__nombreDePersonnesParChaise
-        
-        if self.__parametreObserver == "tempsEmbarquement":
-            return (3600 / (2*(self.__longeurDuTrajet/self.__vitesse) + valeurParametre + self.__tempsDebarquement)) * self.__nombreDeChaise * self.__nombreDePersonnesParChaise
-        
-        if self.__parametreObserver == "tempsDebarquement":
-            return (3600 / (2*(self.__longeurDuTrajet/self.__vitesse) + self.__tempsEmbarquement + valeurParametre)) * self.__nombreDeChaise * self.__nombreDePersonnesParChaise
-        
-        if self.__parametreObserver == "nombreDePersonnesParChaise":
-            return (3600 / (2*(self.__longeurDuTrajet/self.__vitesse) + self.__tempsEmbarquement + self.__tempsDebarquement)) * self.__nombreDeChaise * valeurParametre
+        if valeurParametre > 0:
+            if self.__parametreObserver == "vitesse":
+                return int((3600 / (2*(self.__longeurDuTrajet/valeurParametre) + self.__tempsEmbarquement + self.__tempsDebarquement)) * self.__nombreDeChaise * self.__nombreDePersonnesParChaise)
+            
+            elif self.__parametreObserver == "nombreDeChaise":
+                return int((3600 / (2*(self.__longeurDuTrajet/self.__vitesse) + self.__tempsEmbarquement + self.__tempsDebarquement)) * valeurParametre * self.__nombreDePersonnesParChaise)
+            
+            elif self.__parametreObserver == "longeurDuTrajet":
+                return int((3600 / (2*(valeurParametre/self.__vitesse) + self.__tempsEmbarquement + self.__tempsDebarquement)) * self.__nombreDeChaise * self.__nombreDePersonnesParChaise)
+            
+            elif self.__parametreObserver == "tempsEmbarquement":
+                return int((3600 / (2*(self.__longeurDuTrajet/self.__vitesse) + valeurParametre + self.__tempsDebarquement)) * self.__nombreDeChaise * self.__nombreDePersonnesParChaise)
+            
+            elif self.__parametreObserver == "tempsDebarquement":
+                return int((3600 / (2*(self.__longeurDuTrajet/self.__vitesse) + self.__tempsEmbarquement + valeurParametre)) * self.__nombreDeChaise * self.__nombreDePersonnesParChaise)
+            
+            elif self.__parametreObserver == "nombreDePersonnesParChaise":
+                return int((3600 / (2*(self.__longeurDuTrajet/self.__vitesse) + self.__tempsEmbarquement + self.__tempsDebarquement)) * self.__nombreDeChaise * valeurParametre)
+            else:
+                return 0
         else:
             return 0
 
     def getGraphData(self, resolution, min, max):
         x = np.linspace(min, max, num=resolution)
-        data = np.array([],[])
-        #for i in range(resolution):
-            #data[i][0] = x[i]
-            #data[i][1] = self.calculerNombreDePersonnesParametreManquant(x[i])
-        #print(data)
+        y = np.array([
+            self.calculerNombreDePersonnesParametreManquant(value)
+            for value in x
+        ])
+    
+        return np.column_stack((x, y))
+
+    def getParametreObserver(self):
+        return self.__parametreObserver
+    
+    def importFromCSV(self):
+        print("ouf")
+
+
+    def exportToCSV(self):
+        print("fuck")
 
 
 
@@ -143,6 +157,7 @@ class Chairlift:
     def __str__(self):
         return f"Vitesse: {self.__vitesse}, Nombre de chaises: {self.__nombreDeChaise}, Longueur du trajet: {self.__longeurDuTrajet}, Temps d'embarquement: {self.__tempsEmbarquement}, Temps de débarquement: {self.__tempsDebarquement}, Nombre de personnes par chaise: {self.__nombreDePersonnesParChaise}, Temps de trajet: {self.calculerTempsTrajet()}, Temps de monter: {self.calculerTempsDeMonter()}, Temps de cycle: {self.calculerTempsDeCycle()}"
 
-mon_chairlift = Chairlift()
-mon_chairlift.test()
+#mon_chairlift = Chairlift()
+#mon_chairlift.test()
+#mon_chairlift.setParametreObserver("vitesse")
 #mon_chairlift.getGraphData(11,0,10)
