@@ -1,4 +1,24 @@
-print("tout le monde aime les chairlifts")
+from Sliders import Sliders
+from Chairlift import Chairlift
+
+import customtkinter as ctk
+
+class MainApp(ctk.CTk) :
+
+    def __init__(self) :
+        super().__init__()
+        self.title("Gestionnaire de remonte-pente mécanique")
+        self.geometry("1200x600")
+
+        self.__chairlift = Chairlift()
+
+        self.grid_rowconfigure(0, weight=1)
+        self.sliders = Sliders(self, self.__chairlift)
+        self.sliders.grid(row=0, column=0, sticky="nsew", padx=12, pady=12)
+
 
 if __name__ == "__main__" :
-    print("ok")
+    ctk.set_appearance_mode("System")
+    ctk.set_default_color_theme("green")
+    application = MainApp()
+    application.mainloop()
