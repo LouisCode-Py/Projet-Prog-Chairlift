@@ -27,7 +27,7 @@ class Sliders(ctk.CTkFrame) :
         self.text_cable = ctk.CTkLabel(self, text="0" + " m")
         self.text_cable.grid(row=0, column=2, sticky="ew", padx=PADDING_EN_X, pady=PADDING_EN_Y)
 
-        self.case_cable = ctk.CTkRadioButton(self, text="", command=self._quand_coche_cable, variable=self.radio_var, value=1)
+        self.case_cable = ctk.CTkRadioButton(self, text="", command=self._actualiser_slider, variable=self.radio_var, value=1)
         self.case_cable.grid(row=0, column=3, sticky="e")
         
         
@@ -42,7 +42,7 @@ class Sliders(ctk.CTkFrame) :
         self.text_chaise = ctk.CTkLabel(self, text="0")
         self.text_chaise.grid(row=1, column=2, sticky="ew", padx=PADDING_EN_X, pady=PADDING_EN_Y)
 
-        self.case_chaise = ctk.CTkRadioButton(self, text="", command=self._quand_coche_chaise, variable=self.radio_var, value=2)
+        self.case_chaise = ctk.CTkRadioButton(self, text="", command=self._actualiser_slider, variable=self.radio_var, value=2)
         self.case_chaise.grid(row=1, column=3, sticky="e")
 
         """VITESSE"""
@@ -56,7 +56,7 @@ class Sliders(ctk.CTkFrame) :
         self.text_vitesse = ctk.CTkLabel(self, text="0" + " m/s")
         self.text_vitesse.grid(row=2, column=2, sticky="ew", padx=PADDING_EN_X, pady=PADDING_EN_Y)
 
-        self.case_cable = ctk.CTkRadioButton(self, text="", command=self._quand_coche_vitesse, variable=self.radio_var, value=3)
+        self.case_cable = ctk.CTkRadioButton(self, text="", command=self._actualiser_slider, variable=self.radio_var, value=3)
         self.case_cable.grid(row=2, column=3, sticky="e")
 
         """TEMPS EMBARQUEMENT"""
@@ -70,7 +70,7 @@ class Sliders(ctk.CTkFrame) :
         self.text_embarque = ctk.CTkLabel(self, text="0" + " s")
         self.text_embarque.grid(row=3, column=2, sticky="ew", padx=PADDING_EN_X, pady=PADDING_EN_Y)
 
-        self.case_embarque = ctk.CTkRadioButton(self, text="", command=self._quand_coche_embarque, variable=self.radio_var, value=4)
+        self.case_embarque = ctk.CTkRadioButton(self, text="", command=self._actualiser_slider, variable=self.radio_var, value=4)
         self.case_embarque.grid(row=3, column=3, sticky="e")
 
         """TEMPS DEBARQUEMENT"""
@@ -84,7 +84,7 @@ class Sliders(ctk.CTkFrame) :
         self.text_debarque = ctk.CTkLabel(self, text="0" + " s")
         self.text_debarque.grid(row=4, column=2, sticky="ew", padx=PADDING_EN_X, pady=PADDING_EN_Y)
 
-        self.case_debarque = ctk.CTkRadioButton(self, text="", command=self._quand_coche_debarque, variable=self.radio_var, value=5)
+        self.case_debarque = ctk.CTkRadioButton(self, text="", command=self._actualiser_slider, variable=self.radio_var, value=5)
         self.case_debarque.grid(row=4, column=3, sticky="e")
 
         """CAPACITE CHAISES"""
@@ -98,7 +98,7 @@ class Sliders(ctk.CTkFrame) :
         self.text_capacite = ctk.CTkLabel(self, text="0")
         self.text_capacite.grid(row=5, column=2, sticky="ew", padx=PADDING_EN_X, pady=PADDING_EN_Y)
 
-        self.case_capacite = ctk.CTkRadioButton(self, text="", command=self._quand_coche_capacite, variable=self.radio_var, value=6)
+        self.case_capacite = ctk.CTkRadioButton(self, text="", command=self._actualiser_slider, variable=self.radio_var, value=6)
         self.case_capacite.grid(row=5, column=3, sticky="e")
 
 
@@ -128,50 +128,43 @@ class Sliders(ctk.CTkFrame) :
         self.text_capacite.configure(text=str(self.capacite_chaise))
 
 
-    def _quand_coche_cable(self) :
-        if self.radio_var.get() == 1:
-            # Désactive le slider et le mets en gris
-            self.slider_cable.configure(state="disabled", button_color="gray") 
-        else:
-            # Réactive le slider
-            self.slider_cable.configure(state="normal")
+    def _actualiser_slider(self):
+        selection = self.radio_var.get()
 
+        if selection == 0 : 
+            #TODO A VOIR????
+            print("Ce qu'on met quand rien n'est selectionné...????")
+
+        """LONGUEUR CABLE"""
+        self.slider_cable.configure(state="disabled" if selection == 1 else "normal")
+        if selection == 1 :
+            print("Graph longeur cable dans la bonne place")
+
+        """NOMBRE DE CHAISES"""
+        self.slider_chaise.configure(state="disabled" if selection == 2 else "normal")
+        if selection == 2 :
+            print("Graph nombre chaise dans la bonne place")
+
+        """VITESSE"""
+        self.slider_vitesse.configure(state="disabled" if selection == 3 else "normal")
+        if selection == 3 :
+            print("Graph vitesse dans la bonne place")
+
+        """TEMPS EMBARQUEMENT"""
+        self.slider_embarque.configure(state="disabled" if selection == 4 else "normal")
+        if selection == 4 :
+            print("Graph temps embarquement dans la bonne place")
+
+        """TEMPS DEBARQUEMENT"""
+        self.slider_debarque.configure(state="disabled" if selection == 5 else "normal")
+        if selection == 5 :
+            print("Graph temps debarquement dans la bonne place")
+
+        """CAPACITÉ CHAISE"""
+        self.slider_capacite.configure(state="disabled" if selection == 6 else "normal")
+        if selection == 6 :
+            print("Graph capacité dans la bonne place")
         #TODO FAIRE LE GRAPH
-    
-    def _quand_coche_chaise(self) :
-        # Pareil que dans _quand_coche_cable
-        if self.radio_var.get() == 2:
-            self.slider_chaise.configure(state="disabled", button_color="gray") 
-        else:
-            self.slider_chaise.configure(state="normal")
-
-    def _quand_coche_vitesse(self) :
-        # Pareil que dans _quand_coche_cable
-        if self.radio_var.get() == 3:
-            self.slider_vitesse.configure(state="disabled", button_color="gray")  
-        else:
-            self.slider_vitesse.configure(state="normal")
-
-    def _quand_coche_embarque(self) :
-        # Pareil que dans _quand_coche_cable
-        if self.radio_var.get() == 4:
-            self.slider_embarque.configure(state="disabled", button_color="gray") 
-        else:
-            self.slider_embarque.configure(state="normal")
-
-    def _quand_coche_debarque(self) :
-        # Pareil que dans _quand_coche_cable
-        if self.radio_var.get() == 5:
-            self.slider_debarque.configure(state="disabled", button_color="gray") 
-        else:
-            self.slider_debarque.configure(state="normal")
-
-    def _quand_coche_capacite(self) :
-        # Pareil que dans _quand_coche_cable
-        if self.radio_var.get() == 6:
-            self.slider_capacite.configure(state="disabled", button_color="gray") 
-        else:
-            self.slider_capacite.configure(state="normal")
     
 
 
