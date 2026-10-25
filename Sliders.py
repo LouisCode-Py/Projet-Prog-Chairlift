@@ -8,13 +8,22 @@ PADDING_EN_X = 10
 
 class Sliders(ctk.CTkFrame) :
 
-    def __init__(self, parent) :
+    def __init__(self, parent, chairlift) :
         super().__init__(parent)
         
         self.creer_widgets()
-        self.chairlift = Chairlift()
+        self.chairlift = chairlift
 
     def creer_widgets(self) :
+
+        self.bouton_importer = ctk.CTkButton(self, text="Importer un CSV", command=self._quand_importer)
+        self.bouton_importer.grid(row=1, column=4)
+
+        self.bouton_exporter = ctk.CTkButton(self, text="Exporter un CSV", command=self._quand_exporter)
+        self.bouton_exporter.grid(row=1, column=5)
+
+        self.grid_rowconfigure(0, weight=3)
+        self.grid_rowconfigure(1, weight=1)
 
         # initialiser la variable pour les radiobutton, empeche que plusieurs soient cochés
         self.radio_var = IntVar(value=0)
@@ -234,6 +243,14 @@ class Sliders(ctk.CTkFrame) :
         
         self.case_capacite = ctk.CTkRadioButton(self, text="", command=self._actualiser_slider, variable=self.radio_var, value=6)
         self.case_capacite.grid(row=5, column=3, sticky="e")
+
+    def _quand_importer(self) :
+        self.chairlift.importToCSV()
+        print("Bouton importer")
+
+    def _quand_exporter(self) :
+        self.chairlift.exportToCSV()
+        print("Bouton exporter")
 
     
 

@@ -1,4 +1,5 @@
 from Sliders import Sliders
+from Chairlift import Chairlift
 
 import customtkinter as ctk
 
@@ -9,8 +10,10 @@ class MainApp(ctk.CTk) :
         self.title("Gestionnaire de remonte-pente mécanique")
         self.geometry("1200x600")
 
+        self.__chairlift = Chairlift()
+
         self.grid_rowconfigure(0, weight=1)
-        self.sliders = Sliders(self)
+        self.sliders = Sliders(self, self.__chairlift)
         self.sliders.grid(row=0, column=0, sticky="nsew", padx=12, pady=12)
 
 
