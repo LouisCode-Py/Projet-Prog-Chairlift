@@ -18,6 +18,8 @@ class MainApp(ctk.CTk) :
 
 
 if __name__ == "__main__" :
+    print("ok")
+
     ctk.set_appearance_mode("System")
     ctk.set_default_color_theme("green")
     application = MainApp()
