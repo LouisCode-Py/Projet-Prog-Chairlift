@@ -8,7 +8,7 @@ class MainApp(ctk.CTk) :
     def __init__(self) :
         super().__init__()
         self.title("Gestionnaire de remonte-pente mécanique")
-        self.geometry("1200x600")
+        self.geometry("1200x700")
 
         self.__chairlift = Chairlift()
 
