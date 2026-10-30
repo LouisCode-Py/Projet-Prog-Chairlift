@@ -1,5 +1,6 @@
 from Sliders import Sliders
 from Chairlift import Chairlift
+from GraphControl import GraphControl
 
 import customtkinter as ctk
 
@@ -13,13 +14,26 @@ class MainApp(ctk.CTk) :
         self.__chairlift = Chairlift()
 
         self.grid_rowconfigure(0, weight=1)
-        self.sliders = Sliders(self, self.__chairlift)
+        self.sliders = Sliders(self, self.__chairlift, self.mettre_a_jour)
         self.sliders.grid(row=0, column=0, sticky="nsew", padx=12, pady=12)
+
+        self.graph = GraphControl(self, self.__chairlift)
+        self.graph.grid(row=0, column=1, sticky="nsew", padx=12, pady=12)
+
+        self.grid_columnconfigure(0, weight=1)
+        self.grid_columnconfigure(1, weight=2)
+
+        self.mettre_a_jour()
+
+    # mettre à jour le graphique 
+    def mettre_a_jour(self):
+        #TODO regler le edge case de aucun paramètre observé, c'est juste vide 
+        #TODO c'est quoi le bon titre????
+        self.graph.mise_a_jour_image(titre="Graphique sélectionné")
+
 
 
 if __name__ == "__main__" :
-    print("ok")
-
     ctk.set_appearance_mode("System")
     ctk.set_default_color_theme("green")
     application = MainApp()
