@@ -1,18 +1,18 @@
 import customtkinter as ctk
 from tkinter import IntVar
 
-from Chairlift import Chairlift
-
 PADDING_EN_Y = 30
 PADDING_EN_X = 10
 
 class Sliders(ctk.CTkFrame) :
 
-    def __init__(self, parent, chairlift) :
+    def __init__(self, parent, chairlift, sur_mise_a_jour) :
         super().__init__(parent)
-        
-        self.creer_widgets()
+
         self.chairlift = chairlift
+        self.creer_widgets()
+        self.mise_a_jour = sur_mise_a_jour
+        
 
     def creer_widgets(self) :
 
@@ -48,7 +48,7 @@ class Sliders(ctk.CTkFrame) :
             print("chairlift cable modifié")
         else :
             print("erreur de limite??")
-        #TODO avertir mainapp et recalculer????
+        self.mise_a_jour()
     
     def _quand_slider_chaise(self, valeur) :
         self.nb_chaise = int(valeur)
@@ -58,6 +58,7 @@ class Sliders(ctk.CTkFrame) :
             print("chairlift chaise modifié")
         else :
             print("erreur de limite??")
+        self.mise_a_jour()
 
     def _quand_slider_vitesse(self, valeur) :
         self.vitesse = round(float(valeur), 1)
@@ -67,6 +68,7 @@ class Sliders(ctk.CTkFrame) :
             print("chairlift vitesse modifié")
         else :
             print("erreur de limite??")
+        self.mise_a_jour()
 
     def _quand_slider_embarque(self, valeur) :
         self.temps_embarquement = int(valeur)
@@ -76,6 +78,7 @@ class Sliders(ctk.CTkFrame) :
             print("chairlift embarquement modifié")
         else :
             print("erreur de limite??")
+        self.mise_a_jour()
 
     def _quand_slider_debarque(self, valeur) :
         self.temps_debarquement = int(valeur)
@@ -85,6 +88,7 @@ class Sliders(ctk.CTkFrame) :
             print("chairlift débarquement modifié")
         else :
             print("erreur de limite??")
+        self.mise_a_jour()
 
     def _quand_slider_capacite(self, valeur) :
         self.capacite_chaise = int(valeur)
@@ -94,6 +98,7 @@ class Sliders(ctk.CTkFrame) :
             print("chairlift capacité modifié")
         else :
             print("erreur de limite??")
+        self.mise_a_jour()
 
 
     def _actualiser_slider(self):
@@ -109,6 +114,7 @@ class Sliders(ctk.CTkFrame) :
         resultat1 =  self.chairlift.setParametreObserver("nombreDeChaise")
         if selection == 1  and resultat1 :
             print("Graph longeur cable dans la bonne place")
+            self.mise_a_jour()
         if not resultat1 : 
             print("Erreur dans le setter 1")
 
@@ -118,6 +124,7 @@ class Sliders(ctk.CTkFrame) :
         resultat2 = self.chairlift.setParametreObserver("nombreDeChaise")
         if selection == 2 and resultat2 :
             print("Graph nombre chaise dans la bonne place")
+            self.mise_a_jour()
         if not resultat2 :
             print("Erreur dans le setter 2")
 
@@ -127,6 +134,7 @@ class Sliders(ctk.CTkFrame) :
         resultat3 = self.chairlift.setParametreObserver("vitesse")
         if selection == 3 and resultat3:
             print("Graph vitesse dans la bonne place")
+            self.mise_a_jour()
         if not resultat3 :
             print("Erreur dans le setter 3")
 
@@ -135,6 +143,7 @@ class Sliders(ctk.CTkFrame) :
         resultat4 = self.chairlift.setParametreObserver("tempsEmbarquement")
         if selection == 4 and  resultat4:
             print("Graph temps embarquement dans la bonne place")
+            self.mise_a_jour()
         if not resultat4 :
             print("Erreur dans le setter 4")
 
@@ -143,6 +152,7 @@ class Sliders(ctk.CTkFrame) :
         resultat5 = self.chairlift.setParametreObserver("tempsDebarquement")
         if selection == 5 and resultat5 :
             print("Graph temps debarquement dans la bonne place")
+            self.mise_a_jour()
         if not resultat5 :
             print("Erreur dans le setter 5")
 
@@ -151,10 +161,10 @@ class Sliders(ctk.CTkFrame) :
         resultat6 = self.chairlift.setParametreObserver("nombreDePersonnesParChaise")
         if selection == 6 and resultat6 :
             print("Graph capacité dans la bonne place")
+            self.mise_a_jour()
         if not resultat6 :
             print("Erreur dans le setter 6")
         
-        #TODO FAIRE LES GRAPH
     
 
     def creer_widgets_cable(self) :
@@ -255,5 +265,4 @@ class Sliders(ctk.CTkFrame) :
 #TODO COMMENTE TON CODE!
 #TODO les set des sliders doivent se fier au csv ou bien 0 si pas d'importé (voir lignes 23 et 19 où c'est = à 0)
 #TODO enlever les prints des if de setters...
-#TODO bien placer les boutons importer
 #TODO print dans l'app le nombre de personne....
