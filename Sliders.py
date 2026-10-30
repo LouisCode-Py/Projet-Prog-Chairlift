@@ -165,7 +165,6 @@ class Sliders(ctk.CTkFrame) :
         if not resultat6 :
             print("Erreur dans le setter 6")
         
-        #TODO FAIRE LES GRAPH
     
 
     def creer_widgets_cable(self) :
@@ -266,5 +265,4 @@ class Sliders(ctk.CTkFrame) :
 #TODO COMMENTE TON CODE!
 #TODO les set des sliders doivent se fier au csv ou bien 0 si pas d'importé (voir lignes 23 et 19 où c'est = à 0)
 #TODO enlever les prints des if de setters...
-#TODO bien placer les boutons importer
 #TODO print dans l'app le nombre de personne....
