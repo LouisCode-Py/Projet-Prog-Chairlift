@@ -1,3 +1,5 @@
+
+
 import numpy as np
 import csv
 
@@ -117,14 +119,45 @@ class Chairlift:
     def getParametreObserver(self):
         return self.__parametreObserver
     
-    def importFromCSV(self):
-        print("ouf")
+    def exportToCSV(self, path):
+        ligne = [
+            ("vitesse", self.__vitesse),
+            ("nombreDeChaise", self.__nombreDeChaise),
+            ("nombreDePersonnesParChaise", self.__nombreDePersonnesParChaise),
+            ("longeurDuTrajet", self.__longeurDuTrajet),
+            ("tempsEmbarquement", self.__tempsEmbarquement),
+            ("tempsDebarquement", self.__tempsDebarquement),
+            ("parametreObserver", self.__parametreObserver),
+        ]
+
+        with open(path, "w", newline="", encoding="utf-8") as f:
+            writer = csv.writer(f)
+            writer.writerow(["Parametre", "Valeur"])   # en-tête
+            writer.writerows(ligne)
 
 
-    def exportToCSV(self):
-        print("fuck")
+    def importFromCSV(self, path):
+        try:
+            setters = {
+                "vitesse": (self.setVitesse, float),
+                "nombreDeChaise": (self.setNombreDeChaise, int),
+                "nombreDePersonnesParChaise": (self.setNombreDePersonnesParChaise, int),
+                "longeurDuTrajet": (self.setLongeurDuTrajet, float),
+                "tempsEmbarquement": (self.setTempsEmbarquement, float),
+                "tempsDebarquement": (self.setTempsDebarquement, float),
+                "parametreObserver": (self.setParametreObserver, str),
+            }
 
-
+            with open(path, newline="", encoding="utf-8") as f:
+                for ligne in csv.DictReader(f):
+                    nom = ligne["Parametre"]
+                    if nom not in setters:
+                        continue                      # ligne inconnue : on l'ignore
+                    setter, convert = setters[nom]
+                    if not setter(convert(ligne["Valeur"])):
+                        raise ValueError(f"Valeur invalide pour {nom} : {ligne['Valeur']}")
+        except (OSError, ValueError, KeyError) as error:
+            print("Chargement impossible :", error)
 
     def test(self):
         print("input vitesse: ")
@@ -158,7 +191,13 @@ class Chairlift:
     def __str__(self):
         return f"Vitesse: {self.__vitesse}, Nombre de chaises: {self.__nombreDeChaise}, Longueur du trajet: {self.__longeurDuTrajet}, Temps d'embarquement: {self.__tempsEmbarquement}, Temps de débarquement: {self.__tempsDebarquement}, Nombre de personnes par chaise: {self.__nombreDePersonnesParChaise}, Temps de trajet: {self.calculerTempsTrajet()}, Temps de monter: {self.calculerTempsDeMonter()}, Temps de cycle: {self.calculerTempsDeCycle()}"
 
-#mon_chairlift = Chairlift()
-#mon_chairlift.test()
-#mon_chairlift.setParametreObserver("vitesse")
-#mon_chairlift.getGraphData(11,0,10)
+mon_chairlift = Chairlift()
+mon_chairlift.test()
+mon_chairlift.setParametreObserver("vitesse")
+mon_chairlift.getGraphData(11,0,10)
+#path = filedialog.asksaveasfilename(defaultextension=".csv",
+                                    #filetypes=[("Fichiers CSV", "*.csv")])
+#if path:
+    #self.chairlift.exportToCSV(path)
+mon_chairlift.exportToCSV("parametres.csv")
+mon_chairlift.importFromCSV("parametres.csv")
