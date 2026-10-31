@@ -1,4 +1,5 @@
 import numpy as np
+import csv
 
 class Chairlift:
     def __init__(self):
