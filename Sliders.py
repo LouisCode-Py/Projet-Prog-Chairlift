@@ -112,7 +112,7 @@ class Sliders(ctk.CTkFrame) :
         """LONGUEUR CABLE"""
         self.slider_cable.configure(state="disabled" if selection == 1 else "normal")
 
-        resultat1 =  self.chairlift.setParametreObserver("nombreDeChaise")
+        resultat1 =  self.chairlift.setParametreObserver("longeurDuTrajet")
         if selection == 1  and resultat1 :
             print("Graph longeur cable dans la bonne place")
             self.mise_a_jour()
