@@ -81,6 +81,7 @@ class Chairlift:
     def calculerNombreDePersonnesParHeure(self):
         tempsDeCycle = self.calculerTempsDeCycle()
         nombreDePersonnesParHeure = (3600 / tempsDeCycle) * self.__nombreDeChaise * self.__nombreDePersonnesParChaise
+        print(nombreDePersonnesParHeure)
         return int(nombreDePersonnesParHeure)
     
     def calculerNombreDePersonnesParametreManquant(self, valeurParametre):

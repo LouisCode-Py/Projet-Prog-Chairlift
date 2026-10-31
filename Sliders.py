@@ -106,6 +106,7 @@ class Sliders(ctk.CTkFrame) :
 
         if selection == 0 : 
             #TODO A VOIR????
+            #self.chairilift.calculerNombreDePersonnesParHeure()
             print("Ce qu'on met quand rien n'est selectionné...????")
 
         """LONGUEUR CABLE"""
