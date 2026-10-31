@@ -191,13 +191,13 @@ class Chairlift:
     def __str__(self):
         return f"Vitesse: {self.__vitesse}, Nombre de chaises: {self.__nombreDeChaise}, Longueur du trajet: {self.__longeurDuTrajet}, Temps d'embarquement: {self.__tempsEmbarquement}, Temps de débarquement: {self.__tempsDebarquement}, Nombre de personnes par chaise: {self.__nombreDePersonnesParChaise}, Temps de trajet: {self.calculerTempsTrajet()}, Temps de monter: {self.calculerTempsDeMonter()}, Temps de cycle: {self.calculerTempsDeCycle()}"
 
-mon_chairlift = Chairlift()
-mon_chairlift.test()
-mon_chairlift.setParametreObserver("vitesse")
-mon_chairlift.getGraphData(11,0,10)
+#mon_chairlift = Chairlift()
+#mon_chairlift.test()
+#mon_chairlift.setParametreObserver("vitesse")
+#mon_chairlift.getGraphData(11,0,10)
 #path = filedialog.asksaveasfilename(defaultextension=".csv",
                                     #filetypes=[("Fichiers CSV", "*.csv")])
 #if path:
     #self.chairlift.exportToCSV(path)
-mon_chairlift.exportToCSV("parametres.csv")
-mon_chairlift.importFromCSV("parametres.csv")
+#mon_chairlift.exportToCSV("parametres.csv")
+#mon_chairlift.importFromCSV("parametres.csv")
